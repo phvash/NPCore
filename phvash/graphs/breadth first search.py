@@ -27,7 +27,7 @@ graph = {
 def traverse(graph, start):
     # keep track of all visited nodes
     # this prevents an infinite loop in case of cyclic component
-    visited = []
+    visited = set()
     
     # keep track of nodes to be checked
     queue = [start]
@@ -38,7 +38,7 @@ def traverse(graph, start):
         node = queue.pop(0)
         if node not in visited:
             # add node to list of checked nodes
-            visited.append(node)
+            visited.add(node)
             neighbours = graph[node]
 
             # add neigbours to queue
@@ -46,4 +46,5 @@ def traverse(graph, start):
                 queue.append(neighbour)
     return visited
 
-print(traverse(graph, 'A'))
+visited = traverse(graph, 'A')
+print(set(graph.keys()).difference(visited))
